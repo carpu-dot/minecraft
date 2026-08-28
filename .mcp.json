@@ -1,0 +1,143 @@
+{
+  "mcpServers": {
+    "lana": {
+      "command": "node",
+      "args": ["server.js"],
+      "env": {
+        "LANA_MCP_PORT": "3000",
+        "LANA_MINECRAFT_ROOT": "/srv/minecraft",
+        "LANA_TIMEOUT_SEC": "30"
+      },
+      "timeout": 30000
+    }
+  },
+  "tools": {
+    "server_status": {
+      "description": "Get Minecraft server health and versions (read-only)",
+      "input": {
+        "type": "object",
+        "properties": {
+          "detail_level": {
+            "type": "string",
+            "enum": ["summary", "full"],
+            "default": "full",
+            "description": "Return summary or full status including Java/Minecraft versions"
+          }
+        }
+      },
+      "output": {
+        "type": "object",
+        "properties": {
+          "status": { "type": "string", "enum": ["LIVE_VERIFIED", "UNVERIFIED", "BLOCKED"] },
+          "active_state": { "type": "string", "enum": ["offline", "running", "active"] },
+          "main_pid": { "type": ["integer", "null"] },
+          "minecraft_ready": { "type": "boolean" },
+          "service_state": { "type": "string" },
+          "java_version": { "type": "string" },
+          "minecraft_version": { "type": "string" },
+          "purpur_version": { "type": "string" },
+          "timestamp_utc": { "type": "string", "format": "date-time" }
+        }
+      }
+    },
+    "plugin_inventory": {
+      "description": "List all installed plugins and their load state (read-only)",
+      "input": {
+        "type": "object",
+        "properties": {
+          "filter_by_status": {
+            "type": "string",
+            "enum": ["all", "enabled", "disabled"],
+            "default": "all"
+          },
+          "check_dependencies": {
+            "type": "boolean",
+            "default": true,
+            "description": "Include dependency tree and load-order hints"
+          },
+          "highlight_plugins": {
+            "type": "array",
+            "items": { "type": "string" },
+            "description": "Optional: return extra detail for specific plugins (e.g., ['BlueMap', 'Geyser'])"
+          }
+        }
+      },
+      "output": {
+        "type": "object",
+        "properties": {
+          "status": { "type": "string", "enum": ["LIVE_VERIFIED", "UNVERIFIED", "BLOCKED"] },
+          "plugin_count": { "type": "integer" },
+          "enabled_count": { "type": "integer" },
+          "plugins": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "name": { "type": "string" },
+                "version": { "type": "string" },
+                "enabled": { "type": "boolean" },
+                "load_order": { "type": "integer" },
+                "dependencies": { "type": "array", "items": { "type": "string" } },
+                "sha256": { "type": "string", "description": "Hash for integrity check" }
+              }
+            }
+          },
+          "timestamp_utc": { "type": "string", "format": "date-time" }
+        }
+      }
+    },
+    "error_scan": {
+      "description": "Scan latest.log for errors and exceptions (read-only, secrets redacted)",
+      "input": {
+        "type": "object",
+        "properties": {
+          "since_minutes": {
+            "type": "integer",
+            "default": 60,
+            "description": "Scan logs from last N minutes; 0 = full scan"
+          },
+          "severity": {
+            "type": "string",
+            "enum": ["all", "error", "warn", "critical"],
+            "default": "error"
+          },
+          "cluster_by_cause": {
+            "type": "boolean",
+            "default": true,
+            "description": "Group identical errors and separate primary from follow-on errors"
+          }
+        }
+      },
+      "output": {
+        "type": "object",
+        "properties": {
+          "status": { "type": "string", "enum": ["LIVE_VERIFIED", "UNVERIFIED", "BLOCKED"] },
+          "scan_window": { "type": "string" },
+          "total_errors": { "type": "integer" },
+          "error_clusters": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "cause": { "type": "string" },
+                "count": { "type": "integer" },
+                "severity": { "type": "string" },
+                "first_seen": { "type": "string", "format": "date-time" },
+                "last_seen": { "type": "string", "format": "date-time" },
+                "sample_lines": { "type": "array", "items": { "type": "string" } }
+              }
+            }
+          },
+          "timestamp_utc": { "type": "string", "format": "date-time" }
+        }
+      }
+    }
+  },
+  "security": {
+    "phase": "1_read_only",
+    "redact_secrets": true,
+    "allowed_scopes": ["server_status", "plugin_inventory", "error_scan"],
+    "blocked_operations": ["write", "restart", "plugin_install", "config_apply"],
+    "require_approval": false
+  }
+}
