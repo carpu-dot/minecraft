@@ -1,0 +1,55 @@
+# Carpuncle Agent — Approved Configuration Changes
+# Only configuration keys and values on this list can be autonomously updated by the agent.
+# Non-breaking changes only. Security-critical settings require explicit owner approval.
+
+configs:
+  - file: "server.properties"
+    description: "Vanilla server configuration"
+    properties:
+      difficulty:
+        allowed_values: [ "peaceful", "easy", "normal", "hard" ]
+        current_value: "normal"
+        rationale: "Adjust gameplay difficulty based on player feedback"
+      
+      pvp:
+        allowed_values: [ true, false ]
+        current_value: true
+        rationale: "Enable or disable PvP based on seasonal events"
+      
+      spawn-protection:
+        allowed_values: [ 0, 25, 50, 100, 200 ]
+        current_value: 50
+        rationale: "Adjust spawn protection radius"
+      
+      view-distance:
+        allowed_values: [ 8, 10, 12, 14, 16 ]
+        current_value: 12
+        rationale: "Performance tuning based on player count"
+      
+      simulation-distance:
+        allowed_values: [ 8, 10, 12 ]
+        current_value: 10
+        rationale: "Optimize server load during peak hours"
+
+  - file: "purpur.yml"
+    description: "Purpur server configuration"
+    properties:
+      gameplay.flying-squid.enable:
+        allowed_values: [ true, false ]
+        current_value: true
+        rationale: "Toggle Purpur-specific flying squid mechanic"
+      
+      world-settings.default.gameplay.use-faster-eigencraft-redstone:
+        allowed_values: [ true, false ]
+        current_value: true
+        rationale: "Performance optimization for redstone circuits"
+      
+      world-settings.default.mobs.allow-ice-walker-horses:
+        allowed_values: [ true, false ]
+        current_value: true
+        rationale: "Enable Purpur's ice walker horses for gameplay variety"
+
+# Security-critical settings (never autonomous):
+# - server.properties: rcon.password, server-ip, query.port, enable-rcon
+# - purpur.yml: Any authentication or encryption keys
+# To change security settings: owner must manually edit and commit

@@ -1,0 +1,74 @@
+# Carpuncle Agent — Approved Gameplay Features
+# Only features on this list can be autonomously deployed by the agent.
+# Features are temporary or permanent modifications to gameplay, loot, progression, events.
+
+features:
+  # Seasonal Events
+  - name: halloween-event-2026
+    type: seasonal-event
+    datapack_source: github:carpu-dot/minecraft-events
+    datapack_branch: events/halloween-2026
+    start_date: "2026-10-01"
+    end_date: "2026-10-31"
+    auto_cleanup: true
+    description: "Halloween pumpkin structures, spooky mobs, custom loot"
+    requires_plugins: [ ]
+    requires_datapacks: [ ]
+
+  - name: christmas-event-2026
+    type: seasonal-event
+    datapack_source: github:carpu-dot/minecraft-events
+    datapack_branch: events/christmas-2026
+    start_date: "2026-12-15"
+    end_date: "2027-01-05"
+    auto_cleanup: true
+    description: "Christmas decorations, gift loot, winter challenges"
+    requires_plugins: [ ]
+    requires_datapacks: [ seasonal-winter ]
+
+  # Gameplay Mechanics
+  - name: custom-loot-tables
+    type: gameplay-mechanic
+    datapack_source: github:carpu-dot/minecraft-datapacks
+    datapack_branch: main
+    start_date: "2026-01-01"
+    end_date: "2099-12-31"
+    auto_cleanup: false
+    description: "Enhanced loot tables for dungeons, chests, mob drops"
+    requires_plugins: [ ]
+    requires_datapacks: [ quality-of-life ]
+
+  - name: advancement-trees
+    type: progression
+    datapack_source: github:carpu-dot/minecraft-datapacks
+    datapack_branch: main
+    start_date: "2026-01-01"
+    end_date: "2099-12-31"
+    auto_cleanup: false
+    description: "Custom advancement trees for exploration, building, challenges"
+    requires_plugins: [ ]
+    requires_datapacks: [ quality-of-life ]
+
+  - name: family-events
+    type: community-event
+    datapack_source: github:carpu-dot/minecraft-events
+    datapack_branch: events/family
+    start_date: "2026-07-15"
+    end_date: "2026-08-31"
+    auto_cleanup: true
+    description: "Summer family events: hide-and-seek arenas, treasure hunts, cooperative challenges"
+    requires_plugins: [ ]
+    requires_datapacks: [ ]
+
+  - name: exploration-quests
+    type: gameplay-mechanic
+    datapack_source: github:carpu-dot/minecraft-datapacks
+    datapack_branch: main
+    start_date: "2026-01-01"
+    end_date: "2099-12-31"
+    auto_cleanup: false
+    description: "Structured exploration missions with rewards and waypoints"
+    requires_plugins: [ BlueMap ]
+    requires_datapacks: [ quality-of-life ]
+
+# To add a feature: submit PR with feature definition, datapacks, and rollback plan, owner approval required

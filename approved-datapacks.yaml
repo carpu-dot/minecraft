@@ -1,0 +1,45 @@
+# Carpuncle Agent — Approved Datapacks Allowlist
+# Only datapacks on this list can be autonomously deployed or rotated by the agent.
+
+datapacks:
+  - name: seasonal-summer
+    source: github:carpu-dot/minecraft-datapacks
+    branch: seasonal/summer
+    active_from: "2026-06-21"
+    active_until: "2026-09-20"
+    auto_cleanup: true
+    description: "Summer season with custom biomes, mobs, loot"
+
+  - name: seasonal-autumn
+    source: github:carpu-dot/minecraft-datapacks
+    branch: seasonal/autumn
+    active_from: "2026-09-21"
+    active_until: "2026-12-20"
+    auto_cleanup: true
+    description: "Autumn season with harvest mechanics"
+
+  - name: seasonal-winter
+    source: github:carpu-dot/minecraft-datapacks
+    branch: seasonal/winter
+    active_from: "2026-12-21"
+    active_until: "2027-03-20"
+    auto_cleanup: true
+    description: "Winter season with snow, ice, holiday events"
+
+  - name: seasonal-spring
+    source: github:carpu-dot/minecraft-datapacks
+    branch: seasonal/spring
+    active_from: "2027-03-21"
+    active_until: "2027-06-20"
+    auto_cleanup: true
+    description: "Spring season with new growth and creatures"
+
+  - name: quality-of-life
+    source: github:carpu-dot/minecraft-datapacks
+    branch: main
+    active_from: "2026-01-01"
+    active_until: "2099-12-31"
+    auto_cleanup: false
+    description: "Quality-of-life improvements: custom recipes, advancements, teleport systems"
+
+# To add a datapack: submit PR with source repo and validation data, owner approval required

@@ -1,0 +1,46 @@
+# Carpuncle Agent — Approved Plugins Allowlist
+# Only plugins on this list can be autonomously installed, updated, or removed by the agent.
+
+plugins:
+  - name: BlueMap
+    source: github:BlueMap-Minecraft/BlueMap
+    min_version: "5.0"
+    max_version: "6.0"
+    sha256_override: null
+    description: "3D map visualization"
+    category: "utility"
+
+  - name: Geyser
+    source: github:GeyserMC/Geyser
+    min_version: "2.0"
+    max_version: "3.0"
+    sha256_override: null
+    description: "Bedrock Edition compatibility"
+    category: "connectivity"
+
+  - name: ProtocolLib
+    source: github:dmulloy2/ProtocolLib
+    min_version: "4.8"
+    max_version: "5.0"
+    sha256_override: null
+    description: "Protocol manipulation library (dependency)"
+    category: "library"
+
+  - name: RealisticSeasons
+    source: github:carpu-dot/realistic-seasons
+    min_version: "1.0"
+    max_version: "2.0"
+    sha256_override: null
+    description: "Seasonal weather and gameplay mechanics"
+    category: "gameplay"
+
+  - name: LiteBans
+    source: github:LiteBans/LiteBans
+    min_version: "3.0"
+    max_version: "4.0"
+    sha256_override: null
+    description: "Ban and punishment management"
+    category: "moderation"
+
+# To add a plugin: submit PR with plugin details, owner approval required
+# To remove a plugin: update status to 'deprecated' and set removal_date
